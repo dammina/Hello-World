@@ -1,0 +1,193 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package gisapplication;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+
+/**
+ *
+ * @author dammina
+ */
+public class Main {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        //Road rd1=new Road();
+        //rd1.create();
+        RoadNetwork rdnk=new RoadNetwork();
+        rdnk.createRoads();
+        rdnk.show();
+        BuiltEnvironment bltenvmnt=new BuiltEnvironment();
+        bltenvmnt.create();
+        bltenvmnt.show();
+        NaturalEnvironment ntrlenvmnt=new NaturalEnvironment();
+        ntrlenvmnt.create();
+        ntrlenvmnt.show();
+        // TODO code application logic here
+    }
+
+}
+
+class Road{
+    ArrayList<WayPoint> ends=new ArrayList<WayPoint>();
+    private String roadName;
+    private String roadIdentifier;
+    /*public void create(){
+        WayPoint wp1=new WayPoint();
+                wp1.setX(2.0f, 3.2f);
+                ends.add(wp1);
+                System.out.println("arr Lst:"+ends.get(0));
+    }*/
+    public void setJunction(ArrayList<WayPoint> ends) {
+        this.ends = ends;
+    }
+
+    public void setRoadIdentifier(String roadIdentifier) {
+        this.roadIdentifier = roadIdentifier;
+    }
+
+    public void setRoadName(String roadName) {
+        this.roadName = roadName;
+    }
+    public String getRoadName(){
+        return roadName;
+    }
+    public String getRoadIdentifier(){
+        return roadIdentifier;
+    }
+
+    public ArrayList<WayPoint> getJunction() {
+        return ends;
+    }
+}
+class WayPoint{
+    private float x,y;
+    public void setXY(float x,float y){
+        this.x=x;
+        this.y=y;
+    }
+    public float getX(){
+        return x;
+    }
+    public float getY(){
+        return y;
+    }
+}
+class RoadNetwork{
+    LinkedList<Road> roads=new LinkedList<Road>();
+    public void createRoads(){
+        Road rd1=new Road();
+        Road rd2=new Road();
+        Road rd3=new Road();
+        rd1.setRoadName("Road 01");
+        rd2.setRoadName("Road 02");
+        rd3.setRoadName("Road 03");
+        rd1.setRoadIdentifier("A02");
+        rd2.setRoadIdentifier("A09");
+        rd3.setRoadIdentifier("B234");
+        WayPoint wp1=new WayPoint();
+        wp1.setXY(2.0f, 3.2f);
+        rd1.ends.add(wp1);
+        WayPoint wp2=new WayPoint();
+        wp2.setXY(1.4f, 8.3f);
+        rd2.ends.add(wp2);
+        WayPoint wp3=new WayPoint();
+        wp3.setXY(7.5f, 12.8f);
+        rd3.ends.add(wp3);
+        roads.add(rd1);
+        roads.add(rd2);
+        roads.add(rd3);
+        System.out.println("Road Network:"+roads);
+    }
+    public void show(){
+        System.out.println("GUI for road network!");
+    }
+
+}
+class Entity{
+    private String type;
+    private String name;
+    private float x,y;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setXY(float x,float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+
+}
+class BuiltEnvironment extends Entity{
+    HashSet<Entity> entities=new HashSet<Entity>();
+    public void create(){
+        Entity enty1=new Entity();
+        enty1.setType("House");
+        enty1.setName("Araliyagaha villa");
+        enty1.setXY(2.3f, 3.3f);
+        Entity enty2=new Entity();
+        enty2.setType("Temple");
+        enty2.setName("Bellanvila Raja Maha Viharaya");
+        enty2.setXY(1.2f, 5.8f);
+        Entity enty3=new Entity();
+        enty3.setType("Private Buisness");
+        enty3.setName("K-Zone");
+        enty3.setXY(9.2f, 4.0f);
+        entities.add(enty1);
+        entities.add(enty2);
+        entities.add(enty3);
+        System.out.println("Built Environment:"+entities);
+    }
+    public void show(){
+        System.out.println("GUI for Built Environment!");
+    }
+}
+class NaturalEnvironment extends Entity{
+    HashSet<Entity> entities=new HashSet<Entity>();
+    public void create(){
+        Entity enty1=new Entity();
+        enty1.setType("Waterway");
+        enty1.setName("Kelani River");
+        enty1.setXY(2.3f, 3.3f);
+        Entity enty2=new Entity();
+        enty2.setType("Park");
+        enty2.setName("Viharamaha Devi Park");
+        enty2.setXY(1.2f, 5.8f);
+        entities.add(enty1);
+        entities.add(enty2);
+        System.out.println("Natural Environment:"+entities);
+    }
+    public void show(){
+        System.out.println("GUI for Natural Environment!");
+    }
+
+}
